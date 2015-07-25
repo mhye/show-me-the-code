@@ -1,0 +1,20 @@
+'''读取文本并写入excel
+
+'''
+#读取：
+from openpyxl.writer.excel import ExcelWriter
+from openpyxl.workbook import Workbook
+with open('new.txt','r',encoding='utf-8') as fb:
+	data = fb.read()
+	data = eval(data)
+wb = Workbook()
+ew = ExcelWriter(workbook = wb)
+ws1=wb.worksheets[0]
+
+ws1.tittle = u'大傻逼'
+for i in data:
+
+	ws1.cell(row=i,column=1).value=i
+	for j in range(len(data[i])):
+		ws1.cell(row=i,column=j+2).value=data[i][j] 
+ew.save(filename='dsb.xlsx')
